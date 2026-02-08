@@ -1,0 +1,78 @@
+{
+  "services": {
+    "Blackfire_automation": {
+      "displayName": "Blackfire Automation",
+      "description": "Excel → Notion Sync + Aktienkurs-Updates",
+      "type": "cronjob",
+      "checks": [
+        {
+          "name": "Stock Price Updates",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Blackfire_automation/stock_prices.log",
+          "maxAgeMinutes": 120
+        },
+        {
+          "name": "Morning Sync",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Blackfire_automation/sync_cron.log",
+          "maxAgeMinutes": 1560
+        }
+      ]
+    },
+    "Blackfire_service": {
+      "displayName": "Blackfire Service",
+      "description": "Aktien-Analyse-Plattform",
+      "type": "web",
+      "checks": [
+        {
+          "name": "Vercel App",
+          "type": "http",
+          "url": "https://blackfire-service.vercel.app",
+          "expectedStatus": 200,
+          "timeoutMs": 10000
+        }
+      ]
+    },
+    "Passive Income": {
+      "displayName": "Passive Income Generator",
+      "description": "Tägliche Passive-Income-Ideen via GPT-4o",
+      "type": "cronjob",
+      "checks": [
+        {
+          "name": "Daily Generation",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Passive Income/cron.log",
+          "maxAgeMinutes": 1560
+        }
+      ]
+    },
+    "Watch_Service": {
+      "displayName": "Watch Service",
+      "description": "Luxusuhren-Preisüberwachung",
+      "type": "web",
+      "checks": [
+        {
+          "name": "Web App",
+          "type": "http",
+          "url": "http://72.62.148.205:3001",
+          "expectedStatus": 200,
+          "timeoutMs": 5000
+        }
+      ]
+    },
+    "VOD_Fest": {
+      "displayName": "VOD Fest 2026",
+      "description": "Festival-Website",
+      "type": "web",
+      "checks": [
+        {
+          "name": "WordPress Site",
+          "type": "http",
+          "url": "http://72.62.148.205:8080",
+          "expectedStatus": 200,
+          "timeoutMs": 5000
+        }
+      ]
+    }
+  }
+}
