@@ -25,6 +25,7 @@ export interface ServiceConfig {
   displayName: string;
   description: string;
   type: ServiceType;
+  url?: string;
   checks: CheckConfig[];
 }
 
@@ -73,6 +74,7 @@ export interface ServiceSummary {
   deploymentType: string[];
   status: Status;
   checks: CheckResult[];
+  url?: string;
   github?: string;
   lastChecked: string;
 }

@@ -4,6 +4,7 @@
       "displayName": "Blackfire Automation",
       "description": "Excel → Notion Sync + Aktienkurs-Updates",
       "type": "cronjob",
+      "url": "https://github.com/rseckler/Blackfire_automation",
       "checks": [
         {
           "name": "Stock Price Updates",
@@ -23,6 +24,7 @@
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
+      "url": "https://blackfire-service.vercel.app",
       "checks": [
         {
           "name": "Vercel App",
@@ -37,6 +39,7 @@
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
+      "url": "https://blackfire-service.vercel.app",
       "checks": [
         {
           "name": "Vercel App",
@@ -51,6 +54,7 @@
       "displayName": "Passive Income Generator",
       "description": "Tägliche Passive-Income-Ideen via GPT-4o",
       "type": "cronjob",
+      "url": "https://github.com/rseckler/Passive-Income-Generator",
       "checks": [
         {
           "name": "Daily Generation",
@@ -64,6 +68,7 @@
       "displayName": "Passive Income Generator",
       "description": "Tägliche Passive-Income-Ideen via GPT-4o",
       "type": "cronjob",
+      "url": "https://github.com/rseckler/Passive-Income-Generator",
       "checks": [
         {
           "name": "Daily Generation",
@@ -77,6 +82,7 @@
       "displayName": "Watch Service",
       "description": "Luxusuhren-Preisüberwachung",
       "type": "web",
+      "url": "http://72.62.148.205:3001",
       "checks": [
         {
           "name": "Web App",
@@ -91,6 +97,7 @@
       "displayName": "VOD Fest 2026",
       "description": "Festival-Website",
       "type": "web",
+      "url": "http://72.62.148.205:8080",
       "checks": [
         {
           "name": "WordPress Site",

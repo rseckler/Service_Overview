@@ -37,6 +37,7 @@ export async function GET() {
         deploymentType: svc.deploymentType,
         status: checks.length > 0 ? aggregateStatus(checks) : "gray",
         checks,
+        url: config?.url,
         github: svc.github,
         lastChecked: new Date().toISOString(),
       });

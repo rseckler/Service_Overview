@@ -19,6 +19,32 @@ export function ServiceCard({ service }: { service: ServiceSummary }) {
           <div className="flex items-center gap-3">
             <StatusIndicator status={service.status} size="md" />
             <h2 className="text-lg font-semibold">{service.name}</h2>
+            {service.url && (
+              <a
+                href={service.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-zinc-500 transition-colors hover:text-zinc-300"
+                title={service.url}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            )}
           </div>
           <span
             className={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${typeBadgeColors[service.type] ?? typeBadgeColors.unknown}`}
