@@ -36,8 +36,8 @@ pnpm start        # Production Server
 - `GET /api/services/[slug]` — Einzelner Service mit Errors + Logs
 
 ### Frontend
-- Dashboard: Auto-Refresh alle 60s, Grid aus Service-Cards
-- Detail-Seite: Checks, Errors, aktuelle Logs
+- Dashboard: Auto-Refresh alle 60s, Grid aus Service-Cards mit Service-URL + Link-Icon
+- Detail-Seite: Checks, Errors, letzte 50 Log-Einträge (farbcodiert nach Level)
 
 ## Configuration
 
@@ -48,7 +48,7 @@ PROJECTS_BASE_PATH=/Users/robin/Documents/4_AI   # Lokal
 ```
 
 ### Service Config (services.config.json)
-Definiert Health-Checks pro Service. Services ohne Config-Eintrag erscheinen als "grau" (nicht konfiguriert). Neue Services hinzufügen:
+Definiert Health-Checks pro Service. `url` wird als klickbarer Link auf der Karte angezeigt. Services ohne Config-Eintrag erscheinen als "grau" (nicht konfiguriert). Neue Services hinzufügen:
 
 ```json
 {
@@ -57,13 +57,25 @@ Definiert Health-Checks pro Service. Services ohne Config-Eintrag erscheinen als
       "displayName": "Mein Service",
       "description": "Beschreibung",
       "type": "web",
+      "url": "http://72.62.148.205:XXXX",
       "checks": [
-        { "name": "Health", "type": "http", "url": "http://...", "expectedStatus": 200, "timeoutMs": 5000 }
+        { "name": "Health", "type": "http", "url": "http://72.62.148.205:XXXX", "expectedStatus": 200, "timeoutMs": 5000 }
       ]
     }
   }
 }
 ```
+
+### Monitored Services
+| Service | URL | Check-Typ |
+|---------|-----|-----------|
+| Blackfire Service | http://72.62.148.205:3000 | HTTP |
+| Watch Service | http://72.62.148.205:3001 | HTTP |
+| Service Overview | http://72.62.148.205:3002 | — (self) |
+| Tape Mag Migration | http://72.62.148.205:3003 | HTTP |
+| VOD Fest | http://72.62.148.205:8080 | HTTP |
+| Blackfire Automation | — (cronjob) | Log-Freshness |
+| Passive Income | — (cronjob) | Log-Freshness |
 
 ## Deployment (VPS)
 
