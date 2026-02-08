@@ -57,6 +57,18 @@ export function ServiceCard({ service }: { service: ServiceSummary }) {
           <p className="mt-2 text-sm text-zinc-400">{service.description}</p>
         )}
 
+        {service.url && (
+          <a
+            href={service.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mt-1 block text-xs text-zinc-500 font-mono transition-colors hover:text-zinc-300"
+          >
+            {service.url}
+          </a>
+        )}
+
         {service.techStack.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {service.techStack.slice(0, 5).map((tech) => (
