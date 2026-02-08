@@ -33,6 +33,20 @@
         }
       ]
     },
+    "blackfire-service": {
+      "displayName": "Blackfire Service",
+      "description": "Aktien-Analyse-Plattform",
+      "type": "web",
+      "checks": [
+        {
+          "name": "Vercel App",
+          "type": "http",
+          "url": "https://blackfire-service.vercel.app",
+          "expectedStatus": 200,
+          "timeoutMs": 10000
+        }
+      ]
+    },
     "Passive Income": {
       "displayName": "Passive Income Generator",
       "description": "Tägliche Passive-Income-Ideen via GPT-4o",
@@ -42,6 +56,19 @@
           "name": "Daily Generation",
           "type": "log-freshness",
           "logPath": "{BASE}/Passive Income/cron.log",
+          "maxAgeMinutes": 1560
+        }
+      ]
+    },
+    "Passive-Income-Generator": {
+      "displayName": "Passive Income Generator",
+      "description": "Tägliche Passive-Income-Ideen via GPT-4o",
+      "type": "cronjob",
+      "checks": [
+        {
+          "name": "Daily Generation",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Passive-Income-Generator/cron.log",
           "maxAgeMinutes": 1560
         }
       ]
