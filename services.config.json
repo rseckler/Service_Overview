@@ -24,12 +24,12 @@
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
-      "url": "https://blackfire-service.vercel.app",
+      "url": "http://72.62.148.205:3000",
       "checks": [
         {
-          "name": "Vercel App",
+          "name": "VPS App",
           "type": "http",
-          "url": "https://blackfire-service.vercel.app",
+          "url": "http://72.62.148.205:3000",
           "expectedStatus": 200,
           "timeoutMs": 10000
         }
@@ -39,12 +39,12 @@
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
-      "url": "https://blackfire-service.vercel.app",
+      "url": "http://72.62.148.205:3000",
       "checks": [
         {
-          "name": "Vercel App",
+          "name": "VPS App",
           "type": "http",
-          "url": "https://blackfire-service.vercel.app",
+          "url": "http://72.62.148.205:3000",
           "expectedStatus": 200,
           "timeoutMs": 10000
         }
@@ -88,6 +88,21 @@
           "name": "Web App",
           "type": "http",
           "url": "http://72.62.148.205:3001",
+          "expectedStatus": 200,
+          "timeoutMs": 5000
+        }
+      ]
+    },
+    "tape-mag-migration": {
+      "displayName": "Tape Mag Migration",
+      "description": "Shopify-Migration für tape-mag.com (30k+ Releases)",
+      "type": "web",
+      "url": "http://72.62.148.205:3003",
+      "checks": [
+        {
+          "name": "Web App",
+          "type": "http",
+          "url": "http://72.62.148.205:3003",
           "expectedStatus": 200,
           "timeoutMs": 5000
         }
