@@ -24,27 +24,12 @@
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
-      "url": "http://72.62.148.205:3000",
+      "url": "https://blackfire-service.vercel.app",
       "checks": [
         {
-          "name": "VPS App",
+          "name": "Vercel App",
           "type": "http",
-          "url": "http://72.62.148.205:3000",
-          "expectedStatus": 200,
-          "timeoutMs": 10000
-        }
-      ]
-    },
-    "blackfire-service": {
-      "displayName": "Blackfire Service",
-      "description": "Aktien-Analyse-Plattform",
-      "type": "web",
-      "url": "http://72.62.148.205:3000",
-      "checks": [
-        {
-          "name": "VPS App",
-          "type": "http",
-          "url": "http://72.62.148.205:3000",
+          "url": "https://blackfire-service.vercel.app",
           "expectedStatus": 200,
           "timeoutMs": 10000
         }
