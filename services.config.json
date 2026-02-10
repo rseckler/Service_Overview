@@ -20,7 +20,7 @@
         }
       ]
     },
-    "Blackfire_service": {
+    "blackfire-service": {
       "displayName": "Blackfire Service",
       "description": "Aktien-Analyse-Plattform",
       "type": "web",
