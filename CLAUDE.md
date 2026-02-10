@@ -3,6 +3,8 @@
 **Purpose:** Zentrales Status-Dashboard für alle Services im Workspace. Zeigt Ampel-Status (grün/gelb/rot) basierend auf HTTP-Checks und Log-Freshness-Checks.
 
 **Location:** `Service_Overview/`
+**GitHub:** https://github.com/rseckler/Service_Overview
+**Production:** http://72.62.148.205:3002
 
 ## Quick Start
 
@@ -26,10 +28,12 @@ pnpm start        # Production Server
 - Scannt `PROJECTS_BASE_PATH` nach Verzeichnissen mit `CLAUDE.md`
 - Extrahiert Tech-Stack, Deployment-Typ, GitHub-URL per Regex
 - Gleicht mit `services.config.json` ab für Health-Check-Konfiguration
+- **Wichtig:** Config-Key muss exakt dem Verzeichnisnamen auf dem VPS entsprechen (case-sensitive)
 
 ### Health Checks
 - **HTTP Check:** `fetch(url)` mit Timeout → grün (<3s), gelb (>3s), rot (error)
 - **Log-Freshness:** `fs.stat(logPath).mtime` → prüft Alter + Error-Keywords in Log
+- Services ohne Config-Eintrag erscheinen als "grau" (keine Checks konfiguriert)
 
 ### API Routes
 - `GET /api/services` — Alle Services mit aggregiertem Status
@@ -48,18 +52,19 @@ PROJECTS_BASE_PATH=/Users/robin/Documents/4_AI   # Lokal
 ```
 
 ### Service Config (services.config.json)
-Definiert Health-Checks pro Service. `url` wird als klickbarer Link auf der Karte angezeigt. Services ohne Config-Eintrag erscheinen als "grau" (nicht konfiguriert). Neue Services hinzufügen:
+
+Definiert Health-Checks pro Service. `url` wird als klickbarer Link auf der Karte angezeigt. Der Config-Key muss dem **exakten Verzeichnisnamen** auf dem Ziel-System entsprechen (z.B. `blackfire-service` für `/root/blackfire-service/`).
 
 ```json
 {
   "services": {
-    "MeinService": {
+    "mein-service": {
       "displayName": "Mein Service",
       "description": "Beschreibung",
       "type": "web",
-      "url": "http://72.62.148.205:XXXX",
+      "url": "https://example.com",
       "checks": [
-        { "name": "Health", "type": "http", "url": "http://72.62.148.205:XXXX", "expectedStatus": 200, "timeoutMs": 5000 }
+        { "name": "Health", "type": "http", "url": "https://example.com", "expectedStatus": 200, "timeoutMs": 5000 }
       ]
     }
   }
@@ -67,30 +72,39 @@ Definiert Health-Checks pro Service. `url` wird als klickbarer Link auf der Kart
 ```
 
 ### Monitored Services
+
 | Service | URL | Check-Typ |
 |---------|-----|-----------|
-| Blackfire Service | http://72.62.148.205:3000 | HTTP |
+| Blackfire Service | https://blackfire-service.vercel.app | HTTP |
 | Watch Service | http://72.62.148.205:3001 | HTTP |
-| Service Overview | http://72.62.148.205:3002 | — (self) |
 | Tape Mag Migration | http://72.62.148.205:3003 | HTTP |
 | VOD Fest | http://72.62.148.205:8080 | HTTP |
 | Blackfire Automation | — (cronjob) | Log-Freshness |
 | Passive Income | — (cronjob) | Log-Freshness |
+| Service Overview | http://72.62.148.205:3002 | — (self) |
 
 ## Deployment (VPS)
 
 ```bash
 # Auf VPS:
 cd /root/Service_Overview
+git pull
 pnpm install && pnpm build
+pm2 restart service-overview
+
+# Erstmalig:
 pm2 start ecosystem.config.js
 # → http://72.62.148.205:3002
 ```
 
 ## Key Files
-- `services.config.json` — Health-Check-Konfiguration
-- `src/lib/discovery.ts` — CLAUDE.md Scanner
+
+- `services.config.json` — Health-Check-Konfiguration pro Service
+- `ecosystem.config.js` — PM2 Konfiguration (Port 3002, PROJECTS_BASE_PATH)
+- `src/lib/discovery.ts` — CLAUDE.md Scanner (Service Discovery)
+- `src/lib/config.ts` — Config Loader (Key = exakter Verzeichnisname)
 - `src/lib/health-check.ts` — HTTP + Log-Freshness Checks
 - `src/lib/log-parser.ts` — Log-Datei Parser
-- `src/app/api/services/route.ts` — Services API
-- `ecosystem.config.js` — PM2 Konfiguration
+- `src/app/api/services/route.ts` — Services API (Discovery + Config Merge)
+- `src/app/page.tsx` — Dashboard mit Service-Cards
+- `src/app/services/[slug]/page.tsx` — Service Detail-Seite
