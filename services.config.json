@@ -93,6 +93,46 @@
         }
       ]
     },
+    "Microinvest": {
+      "displayName": "Microinvest Trading",
+      "description": "Dual-Bot Crypto Trading (Kraken + Bybit)",
+      "type": "web",
+      "url": "https://trading.thehotshit.de",
+      "checks": [
+        {
+          "name": "Kraken Dashboard",
+          "type": "http",
+          "url": "https://trading.thehotshit.de",
+          "expectedStatus": 200,
+          "timeoutMs": 10000
+        },
+        {
+          "name": "Bybit Dashboard",
+          "type": "http",
+          "url": "https://trading-bybit.thehotshit.de",
+          "expectedStatus": 200,
+          "timeoutMs": 10000
+        },
+        {
+          "name": "Kraken Log",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Microinvest/user_data/logs/freqtrade.log",
+          "maxAgeMinutes": 5
+        },
+        {
+          "name": "Bybit Log",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Microinvest/user_data/logs/freqtrade-bybit.log",
+          "maxAgeMinutes": 5
+        },
+        {
+          "name": "Monitor Log",
+          "type": "log-freshness",
+          "logPath": "{BASE}/Microinvest/user_data/logs/monitor.log",
+          "maxAgeMinutes": 20
+        }
+      ]
+    },
     "VOD_Fest": {
       "displayName": "VOD Fest 2026",
       "description": "Festival-Website",
