@@ -73,15 +73,32 @@ Definiert Health-Checks pro Service. `url` wird als klickbarer Link auf der Kart
 
 ### Monitored Services
 
-| Service | URL | Check-Typ |
-|---------|-----|-----------|
-| Blackfire Service | https://blackfire-service.vercel.app | HTTP |
-| Watch Service | http://72.62.148.205:3001 | HTTP |
-| Tape Mag Migration | http://72.62.148.205:3003 | HTTP |
-| VOD Fest | http://72.62.148.205:8080 | HTTP |
-| Blackfire Automation | — (cronjob) | Log-Freshness |
-| Passive Income | — (cronjob) | Log-Freshness |
-| Service Overview | http://72.62.148.205:3002 | — (self) |
+| Service | URL | Check-Typ | Status |
+|---------|-----|-----------|--------|
+| Blackfire Service | https://blackfire-service.vercel.app | HTTP | ✅ Active |
+| MyNews App | https://mynews-app-eta.vercel.app | HTTP | ✅ Active |
+| Blackfire Automation | — (cronjob) | Log-Freshness | ✅ Active |
+| Passive Income | — (cronjob) | Log-Freshness | ✅ Active |
+| Service Overview | http://72.62.148.205:3002 | — (self) | ✅ Active |
+| Watch Service (theluxeradar) | http://72.62.148.205:3001 | HTTP | ⏸ Paused (VPS still running, Vercel project deleted) |
+| Tape Mag Migration | http://72.62.148.205:3003 | HTTP | ⏸ Paused (VPS still running, Vercel project deleted) |
+| VOD Fest | http://72.62.148.205:8080 | HTTP | ✅ Active |
+
+### Supabase Konsolidierung (2026-03-13)
+
+Alle Supabase-Projekte wurden in eine einzige Organisation konsolidiert:
+
+**Organisation: Seckler** (Free Plan) — `druewgffxwafpgtyvtbr`
+
+| Projekt | ID | Status |
+|---------|-----|--------|
+| blackfire-service | `lglvuiuwbrhiqvxcriwa` | ✅ Active (Blackfire_automation + Blackfire_service) |
+| vod-auctions | `bofblwqieuvmqybzxapx` | ✅ Active (tape-mag, VOD_discogs) |
+| rseckler's Project | `giaodwqnoivynscckeux` | ⏸ Paused |
+| Banking | `psqfpymxmnpiwvglyriq` | ⏸ Paused |
+
+**Gelöscht:** Blackfire-Org (ehem. Pro Plan, $25/Mo) — Projekt nach Seckler transferiert, auf Free Plan downgraded.
+**Gelöscht:** theluxeradar + tap-mag-mvp Vercel-Projekte.
 
 ## Deployment (VPS)
 

@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import type { ServiceSummary, Status } from "@/lib/types";
 import { Header } from "./header";
 import { ServiceCard } from "./service-card";
+import { PlatformLinks } from "./platform-links";
 
 export function Dashboard() {
   const [services, setServices] = useState<ServiceSummary[]>([]);
@@ -65,6 +66,8 @@ export function Dashboard() {
             ))}
           </div>
         )}
+
+        <PlatformLinks />
       </main>
     </>
   );
